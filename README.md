@@ -7,3 +7,5 @@ A way for me to learn more about RLHF and maybe I write my own transformers from
 might make a decentralized system out of it !
 
 Beating the best chess system out there (alphazero maybe ??)
+
+what are some good papers to go with ?
