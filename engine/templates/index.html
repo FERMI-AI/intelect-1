@@ -1,0 +1,101 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chess Engine</title>
+    <style>
+        .chessboard {
+            border: 2px solid black;
+            width: 400px;
+            height: 400px;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+        }
+
+        .square {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .white {
+            background-color: white;
+        }
+
+        .black {
+            background-color: #808080;
+        }
+    </style>
+</head>
+<body>
+    <h1>Basic Chess Engine</h1>
+    <div class="chessboard" id="board">
+        <!-- The chessboard will be dynamically generated here -->
+    </div>
+    <button onclick="makeMove()">Make Move</button>
+
+    <script>
+        let boardData = [
+            ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
+            ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+            ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
+        ];
+
+        let selectedPiece = null;
+
+        function renderBoard() {
+            const boardElement = document.getElementById('board');
+            boardElement.innerHTML = '';
+
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const piece = boardData[row][col];
+                    const square = document.createElement('div');
+                    square.className = `square ${getColor(row, col)}`;
+                    square.innerHTML = piece;
+                    square.addEventListener('click', () => onSquareClick(row, col));
+                    boardElement.appendChild(square);
+                }
+            }
+        }
+
+        function getColor(row, col) {
+            return (row + col) % 2 === 0 ? 'white' : 'black';
+        }
+
+        function onSquareClick(row, col) {
+            const piece = boardData[row][col];
+
+            // If a piece is already selected, move it to the clicked square
+            if (selectedPiece) {
+                const [selectedRow, selectedCol] = selectedPiece;
+                boardData[row][col] = boardData[selectedRow][selectedCol];
+                boardData[selectedRow][selectedCol] = ' ';
+                selectedPiece = null;
+                renderBoard();
+            } else {
+                // If no piece is selected, select the clicked piece
+                selectedPiece = [row, col];
+            }
+        }
+
+        function makeMove() {
+            // TODO: Implement logic to make the move and update boardData
+            // For this example, we'll just render the board again.
+            selectedPiece = null;
+            renderBoard();
+        }
+
+        // Initial board rendering
+        renderBoard();
+    </script>
+</body>
+</html>

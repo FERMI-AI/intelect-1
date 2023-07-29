@@ -8,3 +8,4 @@ black_king = [1,0,0,0,0,0,1] # [Bl/Wh, P, R, B, Kn, Q, K]
 # maybe all 0s - [0,0,0,0,0,0,0] is an empty block
 
 # Technically its pruning the search tree using Neural Nets
+# getting my minimax and alpha beta pruning concepts right 
